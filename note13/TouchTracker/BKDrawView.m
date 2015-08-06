@@ -62,6 +62,31 @@
     return self;
 }
 
+- (void)moveLine:(UIPanGestureRecognizer *)pgr{
+    if (!self.selectedLine) {
+        return;
+    }
+    
+    // When the pan recognizer changes its positon
+    if (pgr.state == UIGestureRecognizerStateChanged) {
+        // translationInView方法返回，pan gesture已经移动了多远
+        CGPoint translation = [pgr translationInView:self];
+        
+        CGPoint begin = self.selectedLine.begin;
+        CGPoint end = self.selectedLine.end;
+        
+        begin.x += translation.x;
+        begin.y += translation.y;
+        end.x += translation.x;
+        end.y += translation.y;
+        
+        self.selectedLine.begin = begin;
+        self.selectedLine.end = end;
+        
+        [self setNeedsDisplay];
+    }
+}
+
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer{
     if (gestureRecognizer == self.moveRecognizer) {
         return YES;
