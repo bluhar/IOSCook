@@ -63,6 +63,8 @@
 }
 
 - (void)moveLine:(UIPanGestureRecognizer *)pgr{
+    NSLog(@"%@", NSStringFromSelector(_cmd));
+
     if (!self.selectedLine) {
         return;
     }
@@ -84,6 +86,9 @@
         self.selectedLine.end = end;
         
         [self setNeedsDisplay];
+        
+        // 重置translationInVew为零，使得从上一次change事件后从0开始计算translation
+        [pgr setTranslation:CGPointZero inView:self];
     }
 }
 
@@ -131,7 +136,7 @@
         // 获得menu controller单例
         UIMenuController *menu = [UIMenuController sharedMenuController];
         // 创建menu item，并指定title和action
-        UIMenuItem *deleteItem = [[UIMenuItem alloc] initWithTitle:@"Delete" action:@selector(deleteLine:)];
+        UIMenuItem *deleteItem = [[UIMenuItem alloc] initWithTitle:@"Delete1" action:@selector(deleteLine:)];
         // 为menu controller 设置menu items
         menu.menuItems = @[deleteItem];
         // 为menu controller指定距形
@@ -145,6 +150,12 @@
     
     [self setNeedsDisplay];
 }
+
+- (BOOL)canPerformAction:(SEL)action withSender:(id)sender{
+    //return [super canPerformAction:action withSender:sender];
+    return YES;
+}
+
 - (void)deleteLine:(id)sender{
     [self.finishedLines removeObject:self.selectedLine];
     // Redraw everything
