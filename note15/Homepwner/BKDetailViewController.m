@@ -32,14 +32,27 @@
     NSLog(@"Exit textFieldShouldReturn method;");
 
 }
-
 - (IBAction)backgroundTapped:(id)sender {
-    NSLog(@"Enter backgroundTapped method;");
     // 隐藏键盘
     [self.view endEditing:YES];
-    NSLog(@"Exit backgroundTapped method;");
-
+   
+    
+//    for (UIView *subview in self.view.subviews) {
+//        if ([subview hasAmbiguousLayout]) {
+//            [subview exerciseAmbiguityInLayout];
+//        }
+//    }
 }
+
+
+//- (void)viewDidLayoutSubviews{
+//    // 检查子视图是否有ambiguous layout
+//    for (UIView *subview in self.view.subviews) {
+//        if ([subview hasAmbiguousLayout]) {
+//            NSLog(@"AMBIGUOUS: %@", subview);
+//        }
+//    }
+//}
 
 
 
@@ -118,5 +131,6 @@
     _item = item;
     self.navigationItem.title = _item.itemName;
 }
+
 
 @end
