@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>03F5FFFA-35E7-4C52-8FC2-9C837F8E1388</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Homepwner</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>8F8D28CD-B3B9-4D30-9578-22FCE347D049</key>
+		<string>https://github.com/bluhar/IOSCook.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>note16/Homepwner/Homepwner.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>8F8D28CD-B3B9-4D30-9578-22FCE347D049</key>
+		<string>../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/bluhar/IOSCook.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>8F8D28CD-B3B9-4D30-9578-22FCE347D049</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>8F8D28CD-B3B9-4D30-9578-22FCE347D049</string>
+			<key>IDESourceControlWCCName</key>
+			<string>IOSCook</string>
+		</dict>
+	</array>
+</dict>
+</plist>
