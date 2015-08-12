@@ -18,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 
 @property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *cameraButton;
 
 @end
 
@@ -113,6 +114,9 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
+    UIInterfaceOrientation io = [[UIApplication sharedApplication] statusBarOrientation];
+    [self prepareViewsForOrientation:io];
+    
     BKItem *item = self.item;
     
     self.nameField.text = item.itemName;
@@ -151,5 +155,45 @@
     _item = item;
     self.navigationItem.title = _item.itemName;
 }
+
+// 当interface orientation成功改变，view controller会调用此方法。
+// toInterfaceOrientation参数是新的interface orientation
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration{
+    [self prepareViewsForOrientation:toInterfaceOrientation];
+}
+
+//- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration{
+//    [self prepareViewsForOrientation:toInterfaceOrientation];
+//}
+
+- (void)prepareViewsForOrientation:(UIInterfaceOrientation)orientation{
+    // 如果设备是ipad直接返回
+    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+        return;
+    }
+    
+    // 如果interface orientation是水平的，则隐藏图片并禁用camera button
+    if (UIInterfaceOrientationIsLandscape(orientation)) {
+        self.imageView.hidden = YES;
+        self.cameraButton.enabled = NO;
+    } else {
+        self.imageView.hidden = NO;
+        self.cameraButton.enabled = YES;
+    }
+    [ self interfaceOrientation];
+}
+
+
+
+//- (NSUInteger)supportedInterfaceOrientations{
+//    // 如果设备是iPad，则支持所有orientation
+////    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+////        return UIInterfaceOrientationMaskAll;
+////    }else{
+////        return UIInterfaceOrientationMaskAllButUpsideDown;
+////    }
+//    
+//    return UIInterfaceOrientationMaskLandscapeLeft | UIInterfaceOrientationMaskLandscapeRight;
+//}
 
 @end
