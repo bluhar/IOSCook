@@ -10,7 +10,9 @@
 #import "BKItem.h"
 #import "BKImageStore.h"
 
-@interface BKDetailViewController () <UINavigationBarDelegate, UIImagePickerControllerDelegate,UITextFieldDelegate>
+@interface BKDetailViewController () <UINavigationBarDelegate, UIImagePickerControllerDelegate,UITextFieldDelegate, UIPopoverControllerDelegate>
+@property (strong, nonatomic) UIPopoverController *imagePickerPopover;
+
 @property (weak, nonatomic) IBOutlet UITextField *nameField;
 @property (weak, nonatomic) IBOutlet UITextField *serialField;
 @property (weak, nonatomic) IBOutlet UITextField *valueField;
@@ -33,20 +35,25 @@
     NSLog(@"Exit textFieldShouldReturn method;");
 
 }
-
 - (IBAction)backgroundTapped:(id)sender {
     NSLog(@"Enter backgroundTapped method;");
     // 隐藏键盘
     [self.view endEditing:YES];
     NSLog(@"Exit backgroundTapped method;");
+    
 
 }
 
 
-
-
 - (IBAction)takePicture:(id)sender {
     NSLog(@"Enter takePicture method");
+    
+    if ([self.imagePickerPopover isPopoverVisible]) {
+        [self.imagePickerPopover dismissPopoverAnimated:YES];
+        self.imagePickerPopover = nil;
+        return;
+    }
+    
     UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
     
     // 判断设备是否支持相机拍摄
@@ -57,7 +64,21 @@
     }
     // 设置代理
     imagePicker.delegate = self;
-    [self presentViewController:imagePicker animated:YES completion:nil];
+    
+    
+    // 通过popover controller显示image picker controller
+    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+        // 创建popover controller
+        self.imagePickerPopover = [[UIPopoverController alloc] initWithContentViewController:imagePicker];
+        self.imagePickerPopover.delegate = self;
+        
+        [self.imagePickerPopover presentPopoverFromBarButtonItem:sender permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+        
+    } else {
+        // 如果不是ipad设备，直接显示
+        [self presentViewController:imagePicker animated:YES completion:nil];
+    }
+    
     NSLog(@"Exit takePicture method");
 }
 
@@ -71,8 +92,22 @@
     
     self.imageView.image = image;
     
-    // 移除image picker
-    [self dismissViewControllerAnimated:YES completion:nil];
+
+    // 如果image picker是在popover controller中显示的，则调用dismissPopoverAnimated隐藏popover controller
+    // 不过通过此方法移除popover controller，popover controller不会再发送popoverControllerDidDismissPopover消息给其代理
+    if (self.imagePickerPopover) {
+        [self.imagePickerPopover dismissPopoverAnimated:YES];
+        self.imagePickerPopover = nil;
+    } else {
+        // 移除image picker
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
+}
+
+// 当点击屏幕其他地方时，popover controller被移除，此时会发送此消息到其代理
+- (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController{
+    NSLog(@"User dismissed popover");
+    self.imagePickerPopover = nil;
 }
 
 - (void)viewDidLoad{
@@ -89,7 +124,7 @@
     self.imageView = iv;
     
     [self.imageView setContentHuggingPriority:200 forAxis:UILayoutConstraintAxisVertical];
-    //[self.imageView setContentCompressionResistancePriority:700 forAxis:UILayoutConstraintAxisVertical];
+    [self.imageView setContentCompressionResistancePriority:700 forAxis:UILayoutConstraintAxisVertical];
     
     // 创建水平和垂直方向约束
     NSDictionary *nameMap = @{@"imageView": self.imageView,
