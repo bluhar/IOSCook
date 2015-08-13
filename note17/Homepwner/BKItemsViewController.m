@@ -82,12 +82,25 @@
     
     // 新建一条数据
     BKItem *newItem = [[BKItemStore sharedStore] createItem];
-    NSInteger lastRow = [[[BKItemStore sharedStore] allItems] indexOfObject:newItem];
     
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:lastRow inSection:0];
+//    NSInteger lastRow = [[[BKItemStore sharedStore] allItems] indexOfObject:newItem];
+//    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:lastRow inSection:0];
+//    // 插入一行
+//    [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationTop];
     
-    // 插入一行
-    [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationTop];
+    BKDetailViewController *detailViewController = [[BKDetailViewController alloc] initForNewItem:YES];
+    detailViewController.item = newItem;
+    
+    // 重新加载table view数据的block
+    detailViewController.dismissBlock = ^{
+        [self.tableView reloadData];
+    };
+    
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:detailViewController];
+    // 设置modal view controller style
+    navController.modalPresentationStyle = UIModalPresentationFormSheet;
+    // 注意下面这个方法，presentViewController
+    [self presentViewController:navController animated:YES completion:nil];
 }
 //- (IBAction)toggleEditingMode:(id)sender{
 //    if (self.isEditing) {
@@ -129,7 +142,11 @@
 
 // 选中一行
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    BKDetailViewController *detailViewController = [[BKDetailViewController alloc] init];
+    
+    //BKDetailViewController *detailViewController = [[BKDetailViewController alloc] init];
+    // 由于BKDetailViewController重写了父类的指定初始化方法并抛出异常，所以不能直接调用init方法了。
+    // 调用其自己的指定初始化方法
+    BKDetailViewController *detailViewController = [[BKDetailViewController alloc] initForNewItem:NO];
     
     NSArray *items = [[BKItemStore sharedStore] allItems];
     BKItem *selectedItem = items[indexPath.row];

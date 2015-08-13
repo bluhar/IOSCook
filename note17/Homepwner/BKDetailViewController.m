@@ -9,6 +9,7 @@
 #import "BKDetailViewController.h"
 #import "BKItem.h"
 #import "BKImageStore.h"
+#import "BKItemStore.h"
 
 @interface BKDetailViewController () <UINavigationBarDelegate, UIImagePickerControllerDelegate,UITextFieldDelegate, UIPopoverControllerDelegate>
 @property (strong, nonatomic) UIPopoverController *imagePickerPopover;
@@ -25,6 +26,31 @@
 @end
 
 @implementation BKDetailViewController
+
+// 实现头文件中声明的初始化方法
+- (instancetype)initForNewItem:(BOOL)isNew{
+    // 调用父类的指定初始化方法
+    self = [super initWithNibName:nil bundle:nil];
+    
+    if (self) {
+        if (isNew) {
+            UIBarButtonItem *doneItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(save:)];
+            self.navigationItem.rightBarButtonItem = doneItem;
+            
+            UIBarButtonItem *cancelItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancel:)];
+            self.navigationItem.leftBarButtonItem = cancelItem;
+        }
+    }
+    return self;
+}
+// 重写父类的指定初始化方法，抛出异常，提示使用initForNewItem:方法
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
+    @throw [NSException exceptionWithName:@"Wrong initializer" reason:@"Use initForNewItem:" userInfo:nil];
+    return nil;
+}
+
+
+
 
 // 当点击return键 隐藏键盘
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
@@ -218,6 +244,14 @@
     [ self interfaceOrientation];
 }
 
+- (void)save:(id)sender{
+    // 调用其present view controller 移除detail view controller
+    [self.presentingViewController dismissViewControllerAnimated:YES completion:self.dismissBlock];
+}
+- (void)cancel:(id)sender{
+    [[BKItemStore sharedStore] removeItem:self.item];
+    [self.presentingViewController dismissViewControllerAnimated:YES completion:self.dismissBlock];
+}
 
 
 //- (NSUInteger)supportedInterfaceOrientations{
