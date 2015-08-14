@@ -99,6 +99,11 @@
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:detailViewController];
     // 设置modal view controller style
     navController.modalPresentationStyle = UIModalPresentationFormSheet;
+    
+//    navController.modalPresentationStyle = UIModalPresentationCurrentContext;
+//    self.definesPresentationContext = YES;
+    
+    //navController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
     // 注意下面这个方法，presentViewController
     [self presentViewController:navController animated:YES completion:nil];
 }
