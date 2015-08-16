@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface BKItem : NSObject
+@interface BKItem : NSObject <NSCoding>
 //{
 //    NSString *_itemName; //*号说明变量是个指针
 //    NSString *_serialNumber;

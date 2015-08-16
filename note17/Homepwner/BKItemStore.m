@@ -77,5 +77,13 @@
     return self.privateItems;
 }
 
+// 返回application sandbox的Document目录
+- (NSString *)itemArchivePath{
+    NSArray *documentDirectories = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    
+    NSString *documentDirectory = [documentDirectories firstObject];
+    
+    return [documentDirectory stringByAppendingPathComponent:@"items.archive"];
+}
 
 @end

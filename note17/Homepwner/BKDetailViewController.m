@@ -245,7 +245,7 @@
 }
 
 - (void)save:(id)sender{
-    // 调用其present view controller 移除detail view controller
+    // 调用其presenter 移除detail view controller
     [self.presentingViewController dismissViewControllerAnimated:YES completion:self.dismissBlock];
 }
 - (void)cancel:(id)sender{
