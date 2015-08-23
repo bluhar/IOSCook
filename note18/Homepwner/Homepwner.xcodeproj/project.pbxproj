@@ -10,6 +10,7 @@
 		2F00A1B51B65001B00D3F3BF /* BKItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F00A1B41B65001B00D3F3BF /* BKItem.m */; };
 		2F00A1B81B65026D00D3F3BF /* BKItemStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F00A1B71B65026D00D3F3BF /* BKItemStore.m */; };
 		2F0FBEA21B67C1840013291D /* HeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F0FBEA11B67C1840013291D /* HeaderView.xib */; };
+		2F14A9CF1B886E1A00DCF0E3 /* BKReadWriteTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F14A9CE1B886E1A00DCF0E3 /* BKReadWriteTest.m */; };
 		2F2F58B71B6E361200F44BB0 /* BKImageStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F2F58B61B6E361200F44BB0 /* BKImageStore.m */; };
 		2F37043E1B6C8B3600C4660A /* BKDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F37043C1B6C8B3600C4660A /* BKDetailViewController.m */; };
 		2F37043F1B6C8B3600C4660A /* BKDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F37043D1B6C8B3600C4660A /* BKDetailViewController.xib */; };
@@ -44,6 +45,8 @@
 		2F00A1B61B65026D00D3F3BF /* BKItemStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BKItemStore.h; sourceTree = "<group>"; };
 		2F00A1B71B65026D00D3F3BF /* BKItemStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BKItemStore.m; sourceTree = "<group>"; };
 		2F0FBEA11B67C1840013291D /* HeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HeaderView.xib; sourceTree = "<group>"; };
+		2F14A9CD1B886E1A00DCF0E3 /* BKReadWriteTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BKReadWriteTest.h; sourceTree = "<group>"; };
+		2F14A9CE1B886E1A00DCF0E3 /* BKReadWriteTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BKReadWriteTest.m; sourceTree = "<group>"; };
 		2F2F58B51B6E361200F44BB0 /* BKImageStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BKImageStore.h; sourceTree = "<group>"; };
 		2F2F58B61B6E361200F44BB0 /* BKImageStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BKImageStore.m; sourceTree = "<group>"; };
 		2F36ED261B76FC660097B0F8 /* Homepwner copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Homepwner copy-Info.plist"; path = "/Users/viviwei/Documents/IOSCook/note15/Homepwner/Homepwner copy-Info.plist"; sourceTree = "<absolute>"; };
@@ -104,6 +107,8 @@
 				2FB65D9F1B60C65E0000079A /* BKItemsViewController.h */,
 				2F37043B1B6C8B3600C4660A /* BKDetailViewController.h */,
 				2F37043C1B6C8B3600C4660A /* BKDetailViewController.m */,
+				2F14A9CD1B886E1A00DCF0E3 /* BKReadWriteTest.h */,
+				2F14A9CE1B886E1A00DCF0E3 /* BKReadWriteTest.m */,
 				2F37043D1B6C8B3600C4660A /* BKDetailViewController.xib */,
 				2F00A1B31B65001B00D3F3BF /* BKItem.h */,
 				2F00A1B61B65026D00D3F3BF /* BKItemStore.h */,
@@ -277,6 +282,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2F14A9CF1B886E1A00DCF0E3 /* BKReadWriteTest.m in Sources */,
 				2F2F58B71B6E361200F44BB0 /* BKImageStore.m in Sources */,
 				2F00A1B81B65026D00D3F3BF /* BKItemStore.m in Sources */,
 				2FB65DA11B60C65E0000079A /* BKItemsViewController.m in Sources */,
